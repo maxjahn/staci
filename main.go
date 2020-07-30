@@ -9,6 +9,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"time"
@@ -109,6 +110,12 @@ func main() {
 			log.Fatal(err)
 		}
 
+		header := make([]byte, 512)
+		_, err = file.Read(header)
+		contentType := http.DetectContentType(header)
+
+		file.Seek(0, 0)
+
 		reader := bufio.NewReader(file)
 
 		buf := &bytes.Buffer{}
@@ -124,6 +131,7 @@ func main() {
 			BucketName:    targetBucket,
 			ObjectName:    &rel,
 			ContentLength: &objLen,
+			ContentType:   &contentType,
 			PutObjectBody: ioutil.NopCloser(buf),
 			OpcMeta:       nil,
 		}
