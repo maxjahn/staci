@@ -32,7 +32,7 @@ func main() {
 	fmt.Println("\nOCI STAtic Content Importer")
 
 	if *sourceDir == "" || *targetBucket == "" {
-		log.Fatalln("Required flags: -source -target -compartment")
+		log.Fatalln("Required flags: -source -target")
 	}
 
 	osClient, err := objectstorage.NewObjectStorageClientWithConfigurationProvider(common.DefaultConfigProvider())
