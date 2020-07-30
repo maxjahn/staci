@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/apoorvam/goterminal"
@@ -113,6 +114,11 @@ func main() {
 		header := make([]byte, 512)
 		_, err = file.Read(header)
 		contentType := http.DetectContentType(header)
+
+		// hack for css
+		if strings.HasSuffix(strings.ToLower(path), ".css") {
+			contentType = "text/css"
+		}
 
 		file.Seek(0, 0)
 
