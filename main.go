@@ -18,7 +18,6 @@ import (
 	"github.com/apoorvam/goterminal"
 	"github.com/common-nighthawk/go-figure"
 	"github.com/oracle/oci-go-sdk/common"
-	"github.com/oracle/oci-go-sdk/identity"
 	"github.com/oracle/oci-go-sdk/objectstorage"
 )
 
@@ -26,45 +25,14 @@ func main() {
 
 	sourceDir := flag.String("source", "", "source directoy")
 	targetBucket := flag.String("target", "", "target bucket")
-	compartment := flag.String("compartment", "", "OCI compartment name")
 	flag.Parse()
 
 	myFigure := figure.NewFigure("staci", "shadow", true)
 	myFigure.Print()
 	fmt.Println("\nOCI STAtic Content Importer")
 
-	if *sourceDir == "" || *targetBucket == "" || *compartment == "" {
+	if *sourceDir == "" || *targetBucket == "" {
 		log.Fatalln("Required flags: -source -target -compartment")
-	}
-
-	identityClient, err := identity.NewIdentityClientWithConfigurationProvider(common.DefaultConfigProvider())
-	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
-	}
-
-	tenancyID, err := common.DefaultConfigProvider().TenancyOCID()
-	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
-	}
-
-	listCompResp, err := identityClient.ListCompartments(context.Background(), identity.ListCompartmentsRequest{CompartmentId: &tenancyID})
-	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
-	}
-
-	compartmentOCID := ""
-	for _, r := range listCompResp.Items {
-		if *r.Name == *compartment {
-			compartmentOCID = *r.CompartmentId
-		}
-	}
-
-	if compartmentOCID == "" {
-		fmt.Printf("Compartment %v not found in tenancy\n", *compartment)
-		os.Exit(1)
 	}
 
 	osClient, err := objectstorage.NewObjectStorageClientWithConfigurationProvider(common.DefaultConfigProvider())
