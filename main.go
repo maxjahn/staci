@@ -118,6 +118,9 @@ func main() {
 			log.Println(err)
 			os.Exit(1)
 		}
+
+		file.Close()
+
 		time.Sleep(time.Millisecond * 200)
 		writer.Clear()
 		return nil
