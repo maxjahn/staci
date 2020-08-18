@@ -13,7 +13,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/apoorvam/goterminal"
 	"github.com/common-nighthawk/go-figure"
@@ -78,6 +77,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		defer file.Close()
 
 		header := make([]byte, 512)
 		_, err = file.Read(header)
@@ -118,16 +118,12 @@ func main() {
 			log.Println(err)
 			os.Exit(1)
 		}
-
-		file.Close()
-
-		time.Sleep(time.Millisecond * 200)
 		writer.Clear()
 		return nil
 	})
 
 	writer.Reset()
 
-	fmt.Println("\nFinished upload.")
+	fmt.Println("\nFinished uploading files.")
 
 }
