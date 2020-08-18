@@ -32,6 +32,9 @@ jobs:
 
     - name: Build
       run: go build -v .
+      
+    - name: Build Binary
+      run: go build -o staci
 
     - name: Test
       run: go test -v .
