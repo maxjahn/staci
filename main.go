@@ -124,6 +124,6 @@ func main() {
 
 	writer.Reset()
 
-	fmt.Println("\nFinished uploading files.")
+	fmt.Println("\nFinished file upload.")
 
 }
