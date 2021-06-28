@@ -72,6 +72,7 @@ func main() {
 		}
 
 		rel, _ := filepath.Rel(*sourceDir, path)
+		rel = filepath.ToSlash(rel)
 
 		file, err := os.Open(filepath.Clean(path))
 		if err != nil {
