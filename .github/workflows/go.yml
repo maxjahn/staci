@@ -64,15 +64,16 @@ jobs:
           path: |
             dist
 
-      - name: Action Release
+      - name: Upload to Release Action
         # You may pin to the exact commit or the version.
-        # uses: yakuhzi/release-asset@f96c41c3fdc53a02ab20a60014725490f91702a3
-        uses: yakuhzi/release-asset@v1.2.3
+        # uses: Shopify/upload-to-release@9942a4c936dab172f7101dcc7dc20528ea949102
+        uses: Shopify/upload-to-release@v1.0.1
         with:
-          # File to upload to the release
-          file: dist/* 
-          # Path to changelog file
-          # changelog: # optional
+          # Artifact name
+          name: dist-all
+          # Path to the file to upload
+          path: dist/*
+
           
           
 
