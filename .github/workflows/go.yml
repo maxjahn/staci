@@ -57,19 +57,12 @@ jobs:
           # Version of github.com/Songmu/goxz
           # goxz-version: # optional, default is v0.4.1
           
-      - name: Release & Assets
-        # You may pin to the exact commit or the version.
-        # uses: Hs1r1us/Release-AIO@c2a7f552ef323d9411be1862e47ddd2e3eaf8893
-        uses: Hs1r1us/Release-AIO@v2.0.0
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
         with:
-          # The name of the tag
-          tag_name: latest
-          # The name of the release
-          release_name: latest
-          # The path to the asset you want to upload
-          asset_files: dist/*
-          # `true` to identify the release as a prerelease. `false` to identify the release as a full release. Default: `false`
-          prerelease: true
+          name: dist-all
+          path: |
+            dist
 
           
           
