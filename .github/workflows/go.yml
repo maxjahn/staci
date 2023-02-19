@@ -57,13 +57,17 @@ jobs:
           # Version of github.com/Songmu/goxz
           # goxz-version: # optional, default is v0.4.1
           
-      - name: Archive production artifacts
+      - name: Archive latest artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-all
           path: |
             dist
 
+      - name: GitHub Releases
+        # You may pin to the exact commit or the version.
+        # uses: fnkr/github-action-ghr@96b1448dc6162f370067e1de51e856e733a76b4f
+        uses: fnkr/github-action-ghr@v1.3
           
           
 
